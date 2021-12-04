@@ -1,6 +1,6 @@
 with import <nixpkgs> {};
 
 {
-  rtl_433 = callPackage ./package.nix {};
+  rtl_433_latest = callPackage ./package.nix {};
 }
 

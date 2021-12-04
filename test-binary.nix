@@ -1,6 +1,6 @@
 { stdenv
 , python3
-, rtl_433
+, rtl_433_latest
 }:
 
 let
@@ -14,7 +14,7 @@ in stdenv.mkDerivation {
   doCheck = true;
 
   checkInputs = [
-    rtl_433
+    rtl_433_latest
     (python3.withPackages (p: [ p.deepdiff ]))
   ];
 

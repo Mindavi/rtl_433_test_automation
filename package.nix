@@ -9,7 +9,7 @@
 }:
 
 stdenv.mkDerivation {
-  pname = "rtl_433";
+  pname = "rtl_433_latest";
   version = "unstable";
 
   src = <rtl433>;
@@ -26,7 +26,14 @@ stdenv.mkDerivation {
   doCheck = true;
 
   passthru.tests = {
-    binary = callPackage ./test-binary.nix {};
-    false-positive = callPackage ./test-false-positive.nix {};
+    binary = callPackage ./test-binary.nix {
+      # Circular dependencies? This feels hacky...
+      rtl_433_latest = callPackage ./package.nix {};
+    };
+    false-positive = callPackage ./test-false-positive.nix {
+      # Circular dependencies? This feels hacky...
+      rtl_433_latest = callPackages ./package.nix {};
+    };
   };
 }
+

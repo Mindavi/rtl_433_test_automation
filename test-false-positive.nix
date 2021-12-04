@@ -1,6 +1,6 @@
 { stdenv
 , python3
-, rtl_433
+, rtl_433_latest
 , tree
 , bash
 , jq
@@ -26,7 +26,7 @@ in stdenv.mkDerivation {
   '';
 
   checkInputs = [
-    rtl_433
+    rtl_433_latest
     (python3.withPackages (p: [ p.deepdiff ]))
     jq
   ];
