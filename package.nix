@@ -5,11 +5,9 @@
 , librtlsdr
 , python3
 , runCommand
+, callPackage
 }:
 
-let
-  rtl_433_tests = <rtl_433_tests>;
-in
 stdenv.mkDerivation {
   pname = "rtl_433";
   version = "unstable";
@@ -28,23 +26,6 @@ stdenv.mkDerivation {
   doCheck = true;
 
   passthru.tests = {
-    binary = runCommand "rtl-433-binary-tests" {} ''
-      make -C ${rtl_433_tests} test 
-    '';
-    falsepositives = runCommand "rtl-433-false-positives-tests" {} ''
-      make -C ${rtl_433_tests}/test_false_positives
-    '';
+    binary = callPackage ./test-binary.nix {};
   };
-
-  checkInputs = [
-    (python3.withPackages (p: [ p.deepdiff ]))
-  ];
-
-  checkPhase = ''
-    runHook preCheck
-
-    make -C ${rtl_433_tests} test
-
-    runHook postCheck
-  '';
 }
