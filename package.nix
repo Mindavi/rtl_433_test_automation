@@ -32,7 +32,7 @@ stdenv.mkDerivation {
     };
     false-positive = callPackage ./test-false-positive.nix {
       # Circular dependencies? This feels hacky...
-      rtl_433_latest = callPackages ./package.nix {};
+      rtl_433_latest = callPackage ./package.nix {};
     };
   };
 }
