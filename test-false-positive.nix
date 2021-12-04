@@ -11,16 +11,12 @@ let
 in stdenv.mkDerivation {
   name = "rtl_433-false-positive-tests";
 
-  #dontUnpack = true;
   dontConfigure = true;
   dontBuild = true;
   doCheck = true;
 
   src = rtl_433_tests;
 
-  buildInputs = [
-    bash
-  ];
   nativeBuildInputs = [
     bash
   ];
@@ -36,7 +32,6 @@ in stdenv.mkDerivation {
   ];
 
   checkPhase = ''
-    #BUILD_DIR=${rtl_433}/bin
     cd test_false_positives && make run_test BUILD_DIR=${rtl_433}/bin
   '';
 
