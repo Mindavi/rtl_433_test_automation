@@ -39,4 +39,12 @@ stdenv.mkDerivation {
   checkInputs = [
     (python3.withPackages (p: [ p.deepdiff ]))
   ];
+
+  checkPhase = ''
+    runHook preCheck
+
+    make -C ${rtl_433_tests} test
+
+    runHook postCheck
+  '';
 }
