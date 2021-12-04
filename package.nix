@@ -27,5 +27,6 @@ stdenv.mkDerivation {
 
   passthru.tests = {
     binary = callPackage ./test-binary.nix {};
+    false-positive = callPackage ./test-false-positive.nix {};
   };
 }
